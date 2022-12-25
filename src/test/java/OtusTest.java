@@ -24,7 +24,7 @@ public class OtusTest extends AbsTest{
             e.printStackTrace();
         }
 
-        clearAndEnter(By.xpath("//*[@class='new-log-reg __form js-login']/descendant::*[@placeholder='Электронная почта']"), login);
+        clearAndEnter(By.xpath("//*[@class='new-log-reg__form js-login']/descendant::*[@placeholder='Электронная почта']"), login);
         clearAndEnter(By.xpath("//*[@class='new-log-reg__form js-login']/descendant::*[@placeholder='Введите пароль']"), password);
         driver.findElement(By.cssSelector("div.new-input-line_last:nth-child(5) > button:nth-child(1)")).submit();
 
