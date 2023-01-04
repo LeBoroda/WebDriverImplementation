@@ -1,16 +1,31 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ModalWindowTest extends AbsTest {
+import java.time.Duration;
+
+public class ModalWindowTest {
+    WebDriver driver;
+
+    @BeforeEach
+    public void setUp() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
 
     @Test
     public void modalWindowTest() {
         String URL = "https://demo.w3layouts.com/demos_new/template_demo/03-10-2020/photoflash-liberty-demo_Free/685659620/web/index.html?_ga=2.181802926.889871791.1632394818-2083132868.1632394818";
 
-        setUp();
         driver.manage().window().maximize();
         driver.get(URL);
 
@@ -20,13 +35,16 @@ public class ModalWindowTest extends AbsTest {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         javascriptExecutor.executeScript("arguments[0].click()", element);
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='pp_hoverContainer']")));
 
         Assertions.assertTrue(driver.findElement(By.xpath("//*[@class='pp_hoverContainer']")).isDisplayed());
+    }
+
+    @AfterEach
+    public void close() {
+        if (driver != null)
+            driver.quit();
     }
 
 }
