@@ -1,8 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +11,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ModalWindowTest {
-    WebDriver driver;
+    private WebDriver driver;
 
     @BeforeEach
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+    }
+
+    @BeforeAll
+    public static void init(){
+        WebDriverManager.chromedriver().setup();
     }
 
     @Test
