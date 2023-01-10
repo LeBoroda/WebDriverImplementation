@@ -14,14 +14,14 @@ import java.time.Duration;
 public class OtusTest {
     private WebDriver driver;
 
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-    }
-
     @BeforeAll
     public static void init() {
         WebDriverManager.chromedriver().setup();
+    }
+
+    @BeforeEach
+    public void setUp() {
+        driver = new ChromeDriver();
     }
 
     public static Logger log = LogManager.getLogger(OtusTest.class);

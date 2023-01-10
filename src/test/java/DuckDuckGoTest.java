@@ -8,16 +8,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class DuckDuckGoTest{
 
     private WebDriver driver;
+    @BeforeAll
+    public static void init(){
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeEach
     public void setUp(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         driver = new ChromeDriver(options);
-    }
-
-    @BeforeAll
-    public static void init(){
-        WebDriverManager.chromedriver().setup();
     }
     @Test
     public void duckDuckGoTest(){
